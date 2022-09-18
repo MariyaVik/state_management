@@ -4,6 +4,8 @@ import 'package:flutter_provider/services/api_service.dart';
 import 'package:flutter_provider/ui/cart/cart_screen.dart';
 import 'package:flutter_provider/ui/catalog/catalog_screen.dart';
 
+import 'favorite_screen.dart';
+
 APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
 
 class HomeScreen extends StatefulWidget {
@@ -22,11 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    CatalogList(),
-    Container(
-      color: Colors.blue,
-    ),
-    CartList(),
+    const CatalogList(),
+    const FavoriteList(),
+    const CartList(),
   ];
 
   @override

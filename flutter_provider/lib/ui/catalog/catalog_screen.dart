@@ -8,6 +8,8 @@ class CatalogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Каталог');
+
     return FutureBuilder(
       future: apiService.getData(),
       builder: (context, snapshot) {

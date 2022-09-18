@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/favorite.dart';
 import 'package:flutter_provider/models/product.dart';
+import 'package:provider/provider.dart';
 
 // class ProductCardWidget extends StatefulWidget {
 //   Product product;
@@ -14,6 +16,7 @@ class ProductCardWidget extends StatelessWidget {
   ProductCardWidget({required this.product, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print('Товар');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,11 +44,8 @@ class ProductCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.amber,
                     ),
-                    // color: Colors.amber,
-                    child: IconButton(
-                      splashRadius: null,
-                      icon: Icon(Icons.favorite_border),
-                      onPressed: () {},
+                    child: FavoriteButton(
+                      product: product,
                     ),
                   ),
                 )
@@ -74,6 +74,41 @@ class ProductCardWidget extends StatelessWidget {
         Text('\u0024${product.price}'),
         ElevatedButton(onPressed: () {}, child: Text('В корзину')),
       ],
+    );
+  }
+}
+
+class FavoriteButton extends StatelessWidget {
+  final Product product;
+  FavoriteButton({required this.product, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    bool isInFavorite = context.select<FavoriteModel, bool>(
+        (favorites) => favorites.products.contains(product));
+    print(isInFavorite);
+    return IconButton(
+      splashRadius: null,
+      icon: isInFavorite
+          ? const Icon(Icons.favorite_rounded)
+          : const Icon(Icons.favorite_border),
+      onPressed: isInFavorite
+          ? () {
+              print('удалили ${product.title}');
+
+              var favorites = context.read<FavoriteModel>();
+              print(favorites.products);
+              favorites.remove(product);
+              print(favorites.products);
+            }
+          : () {
+              print('добавили ${product.title}');
+
+              var favorites = context.read<FavoriteModel>();
+              print(favorites.products);
+              favorites.add(product);
+              print(favorites.products);
+            },
     );
   }
 }

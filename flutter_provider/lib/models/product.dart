@@ -26,4 +26,8 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Product && id == other.id;
 }
