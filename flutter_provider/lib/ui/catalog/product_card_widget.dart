@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/cart_model.dart';
 import 'package:flutter_provider/models/favorite.dart';
 import 'package:flutter_provider/models/product.dart';
+import 'package:flutter_provider/ui/cart/plus_minus_widget.dart';
 import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  Product product;
-  ProductCardWidget({required this.product, Key? key}) : super(key: key);
+  final Product product;
+  const ProductCardWidget({required this.product, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -60,15 +62,39 @@ class ProductCardWidget extends StatelessWidget {
           ],
         ),
         Text('\u0024${product.price}'),
-        ElevatedButton(onPressed: () {}, child: Text('В корзину')),
+        AddToCartButton(
+          product: product,
+        ),
       ],
     );
   }
 }
 
+class AddToCartButton extends StatelessWidget {
+  final Product product;
+  const AddToCartButton({required this.product, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    bool isInCart = context
+        .select<CartModel, bool>((cart) => cart.products.containsKey(product));
+    var cart = context.read<CartModel>();
+    return isInCart
+        ? Consumer<CartModel>(
+            builder: (context, value, child) =>
+                PlusMinusWidget(product: product),
+          )
+        : ElevatedButton(
+            onPressed: () {
+              cart.add(product);
+            },
+            child: const Text('В корзину'));
+  }
+}
+
 class FavoriteButton extends StatelessWidget {
   final Product product;
-  FavoriteButton({required this.product, Key? key}) : super(key: key);
+  const FavoriteButton({required this.product, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

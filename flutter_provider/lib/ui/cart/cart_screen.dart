@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/cart_model.dart';
 import 'package:flutter_provider/ui/cart/order_cart_widget.dart';
+import 'package:provider/provider.dart';
 
 class CartList extends StatelessWidget {
   const CartList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var cart = context.watch<CartModel>();
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) {
               return OrderCardWidget(
-                index: index,
+                product: cart.products.keys.toList()[index],
               );
             },
-            itemCount: 3,
+            itemCount: cart.products.length,
           ),
         ),
         Padding(
@@ -24,9 +27,12 @@ class CartList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: [Text('ИТОГО:'), Text('555')],
+                children: [
+                  const Text('ИТОГО:'),
+                  Text(cart.totalPrice.toString()),
+                ],
               ),
-              ElevatedButton(onPressed: () {}, child: Text('Оплатить')),
+              ElevatedButton(onPressed: () {}, child: const Text('Оплатить')),
             ],
           ),
         ),

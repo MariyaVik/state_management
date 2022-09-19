@@ -19,7 +19,6 @@ class APIService {
       } else {
         errorMessage = e.message;
       }
-      print(errorMessage);
     }
   }
 }

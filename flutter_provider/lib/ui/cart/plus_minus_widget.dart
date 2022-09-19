@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/cart_model.dart';
+import 'package:flutter_provider/models/product.dart';
+import 'package:provider/provider.dart';
 
 class PlusMinusWidget extends StatelessWidget {
-  const PlusMinusWidget({Key? key}) : super(key: key);
+  final Product product;
+  const PlusMinusWidget({required this.product, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var cart = context.read<CartModel>();
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -13,13 +18,17 @@ class PlusMinusWidget extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            icon: Text('-'),
-            onPressed: (() {}),
+            icon: const Text('-'),
+            onPressed: (() {
+              cart.reduce(product);
+            }),
           ),
-          Text('5'),
+          Text(cart.products[product].toString()),
           IconButton(
-            icon: Text('+'),
-            onPressed: (() {}),
+            icon: const Text('+'),
+            onPressed: (() {
+              cart.add(product);
+            }),
           ),
         ],
       ),
