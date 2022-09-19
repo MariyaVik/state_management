@@ -8,40 +8,38 @@ class CatalogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Каталог');
-
     return FutureBuilder(
       future: apiService.getData(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return Center(
+            return const Center(
               child: Text('NONE'),
             );
           case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           case ConnectionState.done:
             return apiService.hasError
-                ? Center(
+                ? const Center(
                     child: NoInternetWidget(),
                   )
-                : ListView.builder(
-                    itemBuilder: (context, index) => Row(
-                      children: [
-                        Expanded(
-                            child: ProductCardWidget(
-                                product: apiService.products[index * 2])),
-                        if (apiService.products[index] != null)
-                          Expanded(
-                              child: ProductCardWidget(
-                                  product: apiService.products[index * 2 + 1])),
-                      ],
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1 / 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                      ),
+                      itemBuilder: (context, index) => ProductCardWidget(
+                          product: apiService.products[index]),
+                      itemCount: apiService.products.length,
                     ),
-                    itemCount: apiService.products.length ~/ 2 +
-                        1 * apiService.products.length % 2,
                   );
           default:
-            return SingleChildScrollView(
+            return const Center(
               child: Text('Default'),
             );
         }
