@@ -13,20 +13,23 @@ class LoginScreen extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: TextField(
                 decoration: InputDecoration(
-              hintText: 'Логин',
+              hintText: 'Логин (пока любой)',
               border: OutlineInputBorder(),
             )),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
+                obscureText: true,
                 decoration: InputDecoration(
-              hintText: 'Пароль',
-              border: OutlineInputBorder(),
-            )),
+                  hintText: 'Пароль (пока любой)',
+                  border: OutlineInputBorder(),
+                )),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
             child: const Text('Войти'),
           )
         ],

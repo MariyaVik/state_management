@@ -21,7 +21,11 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(fontFamily: 'My'),
-        home: HomeScreen(),
+        initialRoute: '/login',
+        routes: {
+          '/login': (context) => const LoginScreen(),
+          '/home': (context) => const HomeScreen(),
+        },
       ),
     );
   }

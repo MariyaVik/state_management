@@ -9,34 +9,39 @@ class CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cart = context.watch<CartModel>();
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return OrderCardWidget(
-                product: cart.products.keys.toList()[index],
-              );
-            },
-            itemCount: cart.products.length,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return cart.products.isEmpty
+        ? const Center(
+            child: Text('Ваша корзина пуста'),
+          )
+        : Column(
             children: [
-              Column(
-                children: [
-                  const Text('ИТОГО:'),
-                  Text(cart.totalPrice.toString()),
-                ],
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return OrderCardWidget(
+                      product: cart.products.keys.toList()[index],
+                    );
+                  },
+                  itemCount: cart.products.length,
+                ),
               ),
-              ElevatedButton(onPressed: () {}, child: const Text('Оплатить')),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        const Text('ИТОГО:'),
+                        Text(cart.totalPrice.toString()),
+                      ],
+                    ),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('Оплатить')),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
-      ],
-    );
+          );
   }
 }
