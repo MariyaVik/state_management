@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/cart/order_cart_widget.dart';
+import 'package:flutter_riverpod_sk/ui/cart/order_cart_widget.dart';
 
 class CartList extends StatelessWidget {
   const CartList({Key? key}) : super(key: key);

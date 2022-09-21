@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/catalog/product_card_widget.dart';
-import 'package:flutter_provider/ui/home_screen.dart';
-import 'package:flutter_provider/ui/no_internet_widget.dart';
+import 'package:flutter_riverpod_sk/ui/catalog/product_card_widget.dart';
+import 'package:flutter_riverpod_sk/ui/home_screen.dart';
+import 'package:flutter_riverpod_sk/ui/no_internet_widget.dart';
 
 class CatalogList extends StatelessWidget {
   const CatalogList({Key? key}) : super(key: key);

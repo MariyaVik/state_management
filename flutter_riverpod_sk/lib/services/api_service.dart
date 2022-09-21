@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_provider/models/product.dart';
+import 'package:flutter_riverpod_sk/models/product.dart';
 
 class APIService {
   List<Product> products = [];

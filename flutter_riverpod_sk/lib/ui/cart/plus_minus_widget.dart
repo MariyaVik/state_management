@@ -11,6 +11,7 @@ class PlusMinusWidget extends StatelessWidget {
         color: Colors.grey,
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
             icon: Text('-'),

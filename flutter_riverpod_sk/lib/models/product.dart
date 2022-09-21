@@ -1,4 +1,4 @@
-import 'package:flutter_provider/models/rating.dart';
+import 'package:flutter_riverpod_sk/models/rating.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';

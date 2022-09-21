@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/cart/plus_minus_widget.dart';
+import 'package:flutter_riverpod_sk/ui/cart/plus_minus_widget.dart';
 
 class OrderCardWidget extends StatelessWidget {
   int index;
@@ -33,7 +33,7 @@ class OrderCardWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(index.toString()),
+                      Expanded(child: Text(index.toString())),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.delete_outline))
                     ],

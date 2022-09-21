@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/home_screen.dart';
-import 'package:flutter_provider/ui/login_screen.dart';
+import 'package:flutter_riverpod_sk/ui/home_screen.dart';
+import 'package:flutter_riverpod_sk/ui/login_screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
