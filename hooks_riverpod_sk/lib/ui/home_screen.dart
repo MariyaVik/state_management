@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/models/tab_item.dart';
-import 'package:flutter_provider/services/api_service.dart';
-import 'package:flutter_provider/ui/cart/cart_screen.dart';
-import 'package:flutter_provider/ui/catalog/catalog_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod_sk/models/cart_model.dart';
+import 'package:hooks_riverpod_sk/models/favorite.dart';
+import 'package:hooks_riverpod_sk/models/tab_item.dart';
+import 'package:hooks_riverpod_sk/services/api_service.dart';
+import 'package:hooks_riverpod_sk/ui/cart/cart_screen.dart';
+import 'package:hooks_riverpod_sk/ui/catalog/catalog_screen.dart';
+import 'package:hooks_riverpod_sk/ui/favorite_screen.dart';
 
 APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
+
+final favoriteProvider =
+    ChangeNotifierProvider<FavoriteModel>(((ref) => FavoriteModel()));
+
+final cartProvider = ChangeNotifierProvider<CartModel>(((ref) => CartModel()));
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -23,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _widgetOptions = <Widget>[
     CatalogList(),
-    Container(
-      color: Colors.blue,
-    ),
+    FavoriteList(),
     CartList(),
   ];
 

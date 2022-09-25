@@ -1,4 +1,4 @@
-name: flutter_provider
+name: hooks_riverpod_sk
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^4.0.6
+  hooks_riverpod: ^1.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
