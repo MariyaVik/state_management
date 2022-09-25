@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/catalog/product_card_widget.dart';
-import 'package:flutter_provider/ui/home_screen.dart';
-import 'package:flutter_provider/ui/no_internet_widget.dart';
+import 'package:flutter_bloc_sk/ui/catalog/product_card_widget.dart';
+import 'package:flutter_bloc_sk/ui/home_screen.dart';
+import 'package:flutter_bloc_sk/ui/no_internet_widget.dart';
 
 class CatalogList extends StatelessWidget {
   const CatalogList({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class CatalogList extends StatelessWidget {
                         Expanded(
                             child: ProductCardWidget(
                                 product: apiService.products[index * 2])),
-                        if (apiService.products[index] != null)
+                        if (apiService.products.length >= index * 2 + 1)
                           Expanded(
                               child: ProductCardWidget(
                                   product: apiService.products[index * 2 + 1])),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/cart/plus_minus_widget.dart';
+import 'package:flutter_bloc_sk/ui/cart/plus_minus_widget.dart';
 
 class OrderCardWidget extends StatelessWidget {
   int index;
@@ -19,7 +19,7 @@ class OrderCardWidget extends StatelessWidget {
               child: SizedBox.square(
                 dimension: 100,
                 child: Image.network(
-                  'https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg',
+                  'https://loremflickr.com/640/480/abstract',
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
                       ColoredBox(color: Colors.cyan),
@@ -33,7 +33,7 @@ class OrderCardWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(index.toString()),
+                      Expanded(child: Text(index.toString())),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.delete_outline))
                     ],

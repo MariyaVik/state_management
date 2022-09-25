@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/models/tab_item.dart';
-import 'package:flutter_provider/services/api_service.dart';
-import 'package:flutter_provider/ui/cart/cart_screen.dart';
-import 'package:flutter_provider/ui/catalog/catalog_screen.dart';
+import 'package:flutter_bloc_sk/models/tab_item.dart';
+import 'package:flutter_bloc_sk/services/api_service.dart';
+import 'package:flutter_bloc_sk/ui/cart/cart_screen.dart';
+import 'package:flutter_bloc_sk/ui/catalog/catalog_screen.dart';
+import 'package:flutter_bloc_sk/ui/favorite_screen.dart';
 
 APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
 
@@ -23,9 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _widgetOptions = <Widget>[
     CatalogList(),
-    Container(
-      color: Colors.blue,
-    ),
+    FavoriteList(),
     CartList(),
   ];
 
