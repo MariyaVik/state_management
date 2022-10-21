@@ -12,22 +12,29 @@ class FavoriteList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var favorites = ref.watch(favoriteProvider);
+    int rowCount = favorites.products.length % 2 == 0
+        ? favorites.products.length ~/ 2
+        : (favorites.products.length ~/ 2) + 1;
     return favorites.products.isEmpty
         ? const Center(
             child: Text('Вы не добавили ничего в избранное'),
           )
         : Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1 / 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
+            child: ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    ProductCardWidget(product: favorites.products[index * 2]),
+                    const SizedBox(width: 8),
+                    if (index * 2 + 1 < favorites.products.length)
+                      ProductCardWidget(
+                          product: favorites.products[index * 2 + 1]),
+                  ],
+                ),
               ),
-              itemBuilder: (context, index) =>
-                  ProductCardWidget(product: favorites.products[index]),
-              itemCount: favorites.products.length,
+              itemCount: rowCount,
             ),
           );
   }

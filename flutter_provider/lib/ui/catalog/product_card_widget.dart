@@ -10,62 +10,67 @@ class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({required this.product, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox.square(
-          dimension: MediaQuery.of(context).size.width / 2,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(25),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.network(
-                  product.image,
-                  fit: BoxFit.cover,
-                  // loadingBuilder: (context, child, fgvd) =>
-                  //     CircularProgressIndicator(),
-                ),
-                Positioned(
-                  top: 5,
-                  right: 5,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.amber,
-                    ),
-                    child: FavoriteButton(
-                      product: product,
-                    ),
+    double widthItem = MediaQuery.of(context).size.width / 2 - 12;
+    return SizedBox(
+      width: widthItem,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox.square(
+            dimension: widthItem,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    product.image,
+                    fit: BoxFit.cover,
+                    // loadingBuilder: (context, child, fgvd) =>
+                    //     CircularProgressIndicator(),
                   ),
-                )
-              ],
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.amber,
+                      ),
+                      child: FavoriteButton(
+                        product: product,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        Text(
-          product.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Row(
-          children: [
-            const Icon(Icons.star),
-            Text(product.rating.rate.toString()),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5),
-              height: 15,
-              width: 1,
-              color: Colors.black,
-            ),
-            Text(product.rating.count.toString()),
-          ],
-        ),
-        Text('\u0024${product.price}'),
-        AddToCartButton(
-          product: product,
-        ),
-      ],
+          Text(
+            product.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Row(
+            children: [
+              const Icon(Icons.star),
+              Text(product.rating.rate.toString()),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                height: 15,
+                width: 1,
+                color: Colors.black,
+              ),
+              Text(product.rating.count.toString()),
+            ],
+          ),
+          Text('\u0024${product.price}'),
+          AddToCartButton(
+            product: product,
+          ),
+        ],
+      ),
     );
   }
 }
