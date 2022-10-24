@@ -99,22 +99,20 @@ class FavoriteButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Consumer(builder: (context, ref, _) {
-      var favorites = ref.watch(favoriteProvider);
-      bool isInFavorite = favorites.products.contains(product);
-      return IconButton(
-        splashRadius: null,
-        icon: isInFavorite
-            ? const Icon(Icons.favorite_rounded)
-            : const Icon(Icons.favorite_border),
-        onPressed: isInFavorite
-            ? () {
-                ref.read(favoriteProvider).remove(product);
-              }
-            : () {
-                ref.read(favoriteProvider).add(product);
-              },
-      );
-    });
+    bool isInFavorite = ref.watch(favoriteProvider.select(
+      (favorites) => favorites.contains(product),
+    ));
+
+    return IconButton(
+      splashRadius: null,
+      icon: Icon(isInFavorite ? Icons.favorite_rounded : Icons.favorite_border),
+      onPressed: isInFavorite
+          ? () {
+              ref.read(favoriteProvider.notifier).remove(product);
+            }
+          : () {
+              ref.read(favoriteProvider.notifier).add(product);
+            },
+    );
   }
 }
