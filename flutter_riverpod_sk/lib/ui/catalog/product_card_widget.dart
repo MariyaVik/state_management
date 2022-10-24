@@ -80,13 +80,14 @@ class AddToCartButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Consumer(builder: (context, ref, _) {
-      var cart = ref.watch(cartProvider);
-      bool isInCart = cart.products.containsKey(product);
+      bool isInCart = ref.watch(cartProvider.select(
+        (cart) => cart.containsKey(product),
+      ));
       return isInCart
           ? PlusMinusWidget(product: product)
           : ElevatedButton(
               onPressed: () {
-                ref.read(cartProvider).add(product);
+                ref.read(cartProvider.notifier).add(product);
               },
               child: const Text('В корзину'));
     });

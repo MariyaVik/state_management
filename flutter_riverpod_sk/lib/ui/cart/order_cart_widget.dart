@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_sk/models/cart_model.dart';
 import 'package:flutter_riverpod_sk/models/product.dart';
 import 'package:flutter_riverpod_sk/ui/cart/plus_minus_widget.dart';
 import 'package:flutter_riverpod_sk/ui/home_screen.dart';
@@ -11,7 +10,6 @@ class OrderCardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cart = ref.read(cartProvider);
     return Card(
       // color: Color.fromARGB(
       //     255, 255 - index * 10, 255 - index * 5, 255 - index * 20),
@@ -47,7 +45,7 @@ class OrderCardWidget extends ConsumerWidget {
                       ),
                       IconButton(
                           onPressed: () {
-                            cart.remove(product);
+                            ref.read(cartProvider.notifier).remove(product);
                           },
                           icon: const Icon(Icons.delete_outline))
                     ],

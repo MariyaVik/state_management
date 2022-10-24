@@ -15,7 +15,8 @@ APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
 final favoriteProvider = StateNotifierProvider<FavoriteModel, List<Product>>(
     (ref) => FavoriteModel());
 
-final cartProvider = ChangeNotifierProvider<CartModel>(((ref) => CartModel()));
+final cartProvider =
+    StateNotifierProvider<CartModel, Map<Product, int>>((ref) => CartModel());
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

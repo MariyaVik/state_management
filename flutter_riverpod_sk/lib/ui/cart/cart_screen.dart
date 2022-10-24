@@ -9,7 +9,7 @@ class CartList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var cart = ref.watch(cartProvider);
-    return cart.products.isEmpty
+    return cart.isEmpty
         ? const Center(
             child: Text('Ваша корзина пуста'),
           )
@@ -19,10 +19,10 @@ class CartList extends ConsumerWidget {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return OrderCardWidget(
-                      product: cart.products.keys.toList()[index],
+                      product: cart.keys.toList()[index],
                     );
                   },
-                  itemCount: cart.products.length,
+                  itemCount: cart.length,
                 ),
               ),
               Padding(
@@ -33,7 +33,14 @@ class CartList extends ConsumerWidget {
                     Column(
                       children: [
                         const Text('ИТОГО:'),
-                        Text(cart.totalPrice.toString()),
+                        Consumer(builder: (context, ref, _) {
+                          cart = ref.watch(cartProvider);
+                          double totalPrice = cart.keys.fold(
+                              0,
+                              (total, current) =>
+                                  total + current.price * cart[current]!);
+                          return Text('$totalPrice');
+                        }),
                       ],
                     ),
                     ElevatedButton(
