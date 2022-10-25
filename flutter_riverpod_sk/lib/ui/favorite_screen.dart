@@ -24,6 +24,7 @@ class FavoriteList extends ConsumerWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductCardWidget(product: favorites[index * 2]),
                     const SizedBox(width: 8),

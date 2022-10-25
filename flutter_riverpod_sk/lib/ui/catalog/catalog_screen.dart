@@ -29,6 +29,7 @@ class CatalogList extends StatelessWidget {
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ProductCardWidget(
                                 product: apiService.products[index * 2]),

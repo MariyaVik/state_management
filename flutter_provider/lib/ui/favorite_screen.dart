@@ -26,6 +26,7 @@ class FavoriteList extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductCardWidget(product: favorites.products[index * 2]),
                     const SizedBox(width: 8),
