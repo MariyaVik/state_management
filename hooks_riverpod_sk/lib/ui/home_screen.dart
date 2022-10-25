@@ -2,21 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod_sk/models/cart_model.dart';
 import 'package:hooks_riverpod_sk/models/favorite.dart';
+import 'package:hooks_riverpod_sk/models/product.dart';
 import 'package:hooks_riverpod_sk/models/tab_item.dart';
 import 'package:hooks_riverpod_sk/services/api_service.dart';
 import 'package:hooks_riverpod_sk/ui/cart/cart_screen.dart';
 import 'package:hooks_riverpod_sk/ui/catalog/catalog_screen.dart';
-import 'package:hooks_riverpod_sk/ui/favorite_screen.dart';
+
+import 'favorite_screen.dart';
 
 APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
 
-final favoriteProvider =
-    ChangeNotifierProvider<FavoriteModel>(((ref) => FavoriteModel()));
+final favoriteProvider = StateNotifierProvider<FavoriteModel, List<Product>>(
+    (ref) => FavoriteModel());
 
-final cartProvider = ChangeNotifierProvider<CartModel>(((ref) => CartModel()));
+final cartProvider =
+    StateNotifierProvider<CartModel, Map<Product, int>>((ref) => CartModel());
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,16 +27,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<TabItem> tabBar = [
-    TabItem(title: "Каталог", icon: Icon(Icons.list)),
-    TabItem(title: "Избранное", icon: Icon(Icons.favorite)),
-    TabItem(title: "Корзина", icon: Icon(Icons.shopping_basket)),
+    TabItem(title: "Каталог", icon: const Icon(Icons.list)),
+    TabItem(title: "Избранное", icon: const Icon(Icons.favorite)),
+    TabItem(title: "Корзина", icon: const Icon(Icons.shopping_basket)),
   ];
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    CatalogList(),
-    FavoriteList(),
-    CartList(),
+    const CatalogList(),
+    const FavoriteList(),
+    const CartList(),
   ];
 
   @override

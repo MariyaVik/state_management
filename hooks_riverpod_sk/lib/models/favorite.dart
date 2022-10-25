@@ -1,16 +1,17 @@
-import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod_sk/models/product.dart';
 
-class FavoriteModel extends ChangeNotifier {
-  final List<Product> products = [];
+class FavoriteModel extends StateNotifier<List<Product>> {
+  FavoriteModel() : super([]);
 
   void add(Product product) {
-    products.add(product);
-    notifyListeners();
+    state = [...state, product];
   }
 
   void remove(Product product) {
-    products.remove(product);
-    notifyListeners();
+    state = [
+      for (final pr in state)
+        if (pr.id != product.id) pr,
+    ];
   }
 }

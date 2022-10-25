@@ -25,17 +25,24 @@ class CatalogList extends StatelessWidget {
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1 / 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ProductCardWidget(
+                                product: apiService.products[index * 2]),
+                            const SizedBox(width: 8),
+                            if (index * 2 + 1 < apiService.products.length)
+                              ProductCardWidget(
+                                  product: apiService.products[index * 2 + 1]),
+                          ],
+                        ),
                       ),
-                      itemBuilder: (context, index) => ProductCardWidget(
-                          product: apiService.products[index]),
-                      itemCount: apiService.products.length,
+                      itemCount: apiService.products.length % 2 == 0
+                          ? apiService.products.length ~/ 2
+                          : (apiService.products.length ~/ 2) + 1,
                     ),
                   );
           default:

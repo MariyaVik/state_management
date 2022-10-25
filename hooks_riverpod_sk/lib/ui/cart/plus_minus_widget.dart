@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod_sk/models/product.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod_sk/models/product.dart';
 import 'package:hooks_riverpod_sk/ui/home_screen.dart';
 
 class PlusMinusWidget extends HookConsumerWidget {
@@ -9,7 +9,6 @@ class PlusMinusWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cart = ref.read(cartProvider);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -21,18 +20,17 @@ class PlusMinusWidget extends HookConsumerWidget {
           IconButton(
             icon: const Text('-'),
             onPressed: (() {
-              cart.reduce(product);
+              ref.read(cartProvider.notifier).reduce(product);
             }),
           ),
           Consumer(builder: (context, ref, _) {
-            var productCount =
-                ref.watch(cartProvider).products[product].toString();
+            var productCount = ref.watch(cartProvider)[product].toString();
             return Text(productCount);
           }),
           IconButton(
             icon: const Text('+'),
             onPressed: (() {
-              cart.add(product);
+              ref.read(cartProvider.notifier).add(product);
             }),
           ),
         ],

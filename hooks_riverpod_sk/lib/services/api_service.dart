@@ -15,11 +15,11 @@ class APIService {
           response.data.map<Product>((e) => Product.fromJson(e)).toList();
     } on DioError catch (e) {
       hasError = true;
-      if (e.response != null) {
-        errorMessage = e.response!.data['message'];
-      } else {
-        errorMessage = e.message;
-      }
+      // if (e.response != null) {
+      //   errorMessage = e.response!.data['message'];
+      // } else {
+      errorMessage = e.message;
+      // }
       print(errorMessage);
     }
   }

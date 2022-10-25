@@ -1,32 +1,33 @@
-import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod_sk/models/product.dart';
 
-class CartModel extends ChangeNotifier {
-  final Map<Product, int> products = {};
-  double get totalPrice => products.keys
-      .fold(0, (total, current) => total + current.price * products[current]!);
+class CartModel extends StateNotifier<Map<Product, int>> {
+  CartModel() : super({});
+
+  double get totalPrice => state.keys
+      .fold(0, (total, current) => total + current.price * state[current]!);
 
   void add(Product product) {
-    if (products.containsKey(product)) {
-      products[product] = products[product]! + 1;
+    if (state.containsKey(product)) {
+      state[product] = state[product]! + 1;
+      state = Map.from(state);
     } else {
-      products[product] = 1;
+      state[product] = 1;
+      state = Map.from(state);
     }
-
-    notifyListeners();
   }
 
   void reduce(Product product) {
-    if (products[product] == 1) {
+    if (state[product] == 1) {
       remove(product);
     } else {
-      products[product] = products[product]! - 1;
+      state[product] = state[product]! - 1;
+      state = Map.from(state);
     }
-    notifyListeners();
   }
 
   void remove(Product product) {
-    products.remove(product);
-    notifyListeners();
+    state.remove(product);
+    state = Map.from(state);
   }
 }

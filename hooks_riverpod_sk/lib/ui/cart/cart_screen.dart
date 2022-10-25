@@ -9,7 +9,7 @@ class CartList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var cart = ref.watch(cartProvider);
-    return cart.products.isEmpty
+    return cart.isEmpty
         ? const Center(
             child: Text('Ваша корзина пуста'),
           )
@@ -19,10 +19,10 @@ class CartList extends HookConsumerWidget {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return OrderCardWidget(
-                      product: cart.products.keys.toList()[index],
+                      product: cart.keys.toList()[index],
                     );
                   },
-                  itemCount: cart.products.length,
+                  itemCount: cart.length,
                 ),
               ),
               Padding(
@@ -33,7 +33,11 @@ class CartList extends HookConsumerWidget {
                     Column(
                       children: [
                         const Text('ИТОГО:'),
-                        Text(cart.totalPrice.toString()),
+                        Consumer(builder: (context, ref, _) {
+                          cart = ref.watch(cartProvider);
+                          return Text(
+                              '${ref.read(cartProvider.notifier).totalPrice}');
+                        }),
                       ],
                     ),
                     ElevatedButton(

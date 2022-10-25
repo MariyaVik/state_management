@@ -35,11 +35,8 @@ class CartList extends ConsumerWidget {
                         const Text('ИТОГО:'),
                         Consumer(builder: (context, ref, _) {
                           cart = ref.watch(cartProvider);
-                          double totalPrice = cart.keys.fold(
-                              0,
-                              (total, current) =>
-                                  total + current.price * cart[current]!);
-                          return Text('$totalPrice');
+                          return Text(
+                              '${ref.read(cartProvider.notifier).totalPrice}');
                         }),
                       ],
                     ),
