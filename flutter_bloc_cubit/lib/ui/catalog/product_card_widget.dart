@@ -82,7 +82,7 @@ class AddToCartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, Map<Product, int>>(builder: (context, state) {
       bool isInCart = state.containsKey(product);
-
+      print(product.id.toString() + ' ' + isInCart.toString());
       return isInCart
           ? PlusMinusWidget(product: product)
           : ElevatedButton(

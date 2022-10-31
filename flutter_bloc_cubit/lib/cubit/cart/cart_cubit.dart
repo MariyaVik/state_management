@@ -13,7 +13,7 @@ class CartCubit extends Cubit<Map<Product, int>> {
     } else {
       state[product] = 1;
     }
-    emit(state);
+    emit(Map.from(state));
   }
 
   void reduce(Product product) {
@@ -21,12 +21,12 @@ class CartCubit extends Cubit<Map<Product, int>> {
       remove(product);
     } else {
       state[product] = state[product]! - 1;
-      emit(state);
+      emit(Map.from(state));
     }
   }
 
   void remove(Product product) {
     state.remove(product);
-    emit(state);
+    emit(Map.from(state));
   }
 }

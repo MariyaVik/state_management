@@ -20,7 +20,7 @@ class PlusMinusWidget extends StatelessWidget {
           IconButton(
             icon: const Text('-'),
             onPressed: (() {
-              context.read().reduce(product);
+              context.read<CartCubit>().reduce(product);
             }),
           ),
           BlocBuilder<CartCubit, Map<Product, int>>(builder: (context, state) {

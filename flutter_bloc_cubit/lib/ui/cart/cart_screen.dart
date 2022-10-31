@@ -35,7 +35,7 @@ class CartList extends StatelessWidget {
                       Column(
                         children: [
                           const Text('ИТОГО:'),
-                          Text('${state}'),
+                          Text('${context.watch<CartCubit>().totalPrice}'),
                           // BlocBuilder<CartCubit, Map<Product, int>>(
                           //     builder: (context, state) {
                           //   // cart = ref.watch(cartProvider);
