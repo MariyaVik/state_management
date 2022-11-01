@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_cubit/models/product.dart';
-import 'package:meta/meta.dart';
 
 class FavoriteCubit extends Cubit<List<Product>> {
   FavoriteCubit() : super([]);

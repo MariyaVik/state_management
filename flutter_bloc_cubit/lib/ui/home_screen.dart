@@ -8,7 +8,7 @@ import 'package:flutter_bloc_cubit/ui/favorite_screen.dart';
 APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -16,16 +16,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<TabItem> tabBar = [
-    TabItem(title: "Каталог", icon: Icon(Icons.list)),
-    TabItem(title: "Избранное", icon: Icon(Icons.favorite)),
-    TabItem(title: "Корзина", icon: Icon(Icons.shopping_basket)),
+    TabItem(title: "Каталог", icon: const Icon(Icons.list)),
+    TabItem(title: "Избранное", icon: const Icon(Icons.favorite)),
+    TabItem(title: "Корзина", icon: const Icon(Icons.shopping_basket)),
   ];
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    CatalogList(),
-    FavoriteList(),
-    CartList(),
+    const CatalogList(),
+    const FavoriteList(),
+    const CartList(),
   ];
 
   @override

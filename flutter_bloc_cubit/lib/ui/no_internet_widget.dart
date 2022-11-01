@@ -9,9 +9,9 @@ class NoInternetWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Image.asset('images/gg.png'),
-        Text('Нет подключения к интернету'),
-        Text('Проверьте подключение и попробуйте обносить страницу'),
-        ElevatedButton(onPressed: () {}, child: Text('Обновить')),
+        const Text('Нет подключения к интернету'),
+        const Text('Проверьте подключение и попробуйте обносить страницу'),
+        ElevatedButton(onPressed: () {}, child: const Text('Обновить')),
       ],
     );
   }

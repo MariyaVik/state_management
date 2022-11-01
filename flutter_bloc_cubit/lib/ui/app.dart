@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(fontFamily: 'Vetka'),
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

@@ -10,6 +10,7 @@ class PlusMinusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: 28,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.grey,
@@ -18,6 +19,8 @@ class PlusMinusWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
+            // iconSize: 28,
+            // padding: EdgeInsets.all(0),
             icon: const Text('-'),
             onPressed: (() {
               context.read<CartCubit>().reduce(product);
@@ -27,6 +30,8 @@ class PlusMinusWidget extends StatelessWidget {
             return Text(state[product].toString());
           }),
           IconButton(
+            // iconSize: 28,
+            // padding: EdgeInsets.all(0),
             icon: const Text('+'),
             onPressed: (() {
               context.read<CartCubit>().add(product);
