@@ -9,4 +9,8 @@ class AddProductToFavorite extends FavoriteEvent {
   AddProductToFavorite({required this.product});
 }
 
-class RemoveProductFromFavorite extends FavoriteEvent {}
+class RemoveProductFromFavorite extends FavoriteEvent {
+  final Product product;
+
+  RemoveProductFromFavorite({required this.product});
+}

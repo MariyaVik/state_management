@@ -1,7 +1,7 @@
 part of 'favorite_bloc.dart';
 
 class FavoriteState {
-  final FavoriteModel favorites;
+  final List<Product> favorites;
 
-  FavoriteState({this.favorites = const FavoriteModel()});
+  FavoriteState({this.favorites = const []});
 }

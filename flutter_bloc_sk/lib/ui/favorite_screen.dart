@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_sk/blocks/favorite_bloc/favorite_bloc.dart';
+import 'package:flutter_bloc_sk/models/product.dart';
 
 import 'catalog/product_card_widget.dart';
 
@@ -7,24 +10,33 @@ class FavoriteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var products = [];
-    return products.isEmpty
-        ? const Center(
-            child: Text('Вы не добавили ничего в избранное'),
-          )
-        : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1 / 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
+    return BlocBuilder<FavoriteBloc, FavoriteState>(builder: ((context, state) {
+      int rowCount = state.favorites.length % 2 == 0
+          ? state.favorites.length ~/ 2
+          : (state.favorites.length ~/ 2) + 1;
+      return state.favorites.isEmpty
+          ? const Center(
+              child: Text('Вы не добавили ничего в избранное'),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ProductCardWidget(product: state.favorites[index * 2]),
+                      const SizedBox(width: 8),
+                      if (index * 2 + 1 < state.favorites.length)
+                        ProductCardWidget(
+                            product: state.favorites[index * 2 + 1]),
+                    ],
+                  ),
+                ),
+                itemCount: rowCount,
               ),
-              itemBuilder: (context, index) =>
-                  ProductCardWidget(product: products[index]),
-              itemCount: products.length,
-            ),
-          );
+            );
+    }));
   }
 }
