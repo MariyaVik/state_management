@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_sk/models/product.dart';
+import 'package:flutter_bloc_sk/blocks/cart_bloc/cart_bloc.dart';
 import 'package:flutter_bloc_sk/ui/cart/order_cart_widget.dart';
 
 class CartList extends StatelessWidget {
@@ -8,48 +8,46 @@ class CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return BlocBuilder<CartCubit, Map<Product, int>>(
-    //     builder: ((context, state) {
-    //   return state.isEmpty
-    //       ? const Center(
-    //           child: Text('Ваша корзина пуста'),
-    //         )
-    //       : Column(
-    //           children: [
-    //             Expanded(
-    //               child: ListView.builder(
-    //                 itemBuilder: (context, index) {
-    //                   return OrderCardWidget(
-    //                     product: state.keys.toList()[index],
-    //                   );
-    //                 },
-    //                 itemCount: state.length,
-    //               ),
-    //             ),
-    //             Padding(
-    //               padding: const EdgeInsets.all(8.0),
-    //               child: Row(
-    //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //                 children: [
-    //                   Column(
-    //                     children: [
-    //                       const Text('ИТОГО:'),
-    //                       Text('${context.watch<CartCubit>().totalPrice}'),
-    //                       // BlocBuilder<CartCubit, Map<Product, int>>(
-    //                       //     builder: (context, state) {
-    //                       //   // cart = ref.watch(cartProvider);
-    //                       //   return Text('${state}');
-    //                       // }),
-    //                     ],
-    //                   ),
-    //                   ElevatedButton(
-    //                       onPressed: () {}, child: const Text('Оплатить')),
-    //                 ],
-    //               ),
-    //             ),
-    //           ],
-    //         );
-    // }));
+    return BlocBuilder<CartBloc, CartState>(builder: ((context, state) {
+      if (state is CartEmptyState) {
+        return const Center(
+          child: Text('Ваша корзина пуста'),
+        );
+      }
+      return Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return OrderCardWidget(
+                  product: state.cart.keys.toList()[index],
+                );
+              },
+              itemCount: state.cart.length,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    const Text('ИТОГО:'),
+                    Text('${context.watch<CartBloc>().totalPrice}'),
+                    // BlocBuilder<CartCubit, Map<Product, int>>(
+                    //     builder: (context, state) {
+                    //   // cart = ref.watch(cartProvider);
+                    //   return Text('${state}');
+                    // }),
+                  ],
+                ),
+                ElevatedButton(onPressed: () {}, child: const Text('Оплатить')),
+              ],
+            ),
+          ),
+        ],
+      );
+    }));
   }
 }

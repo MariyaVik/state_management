@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_sk/blocks/cart_bloc/cart_bloc.dart';
 import 'package:flutter_bloc_sk/blocks/favorite_bloc/favorite_bloc.dart';
 import 'package:flutter_bloc_sk/models/product.dart';
 import 'package:flutter_bloc_sk/ui/cart/plus_minus_widget.dart';
@@ -65,33 +66,35 @@ class ProductCardWidget extends StatelessWidget {
           ),
           Text('\u0024${product.price}'),
           const SizedBox(height: 5),
-          // AddToCartButton(
-          //   product: product,
-          // ),
+          AddToCartButton(
+            product: product,
+          ),
         ],
       ),
     );
   }
 }
 
-// class AddToCartButton extends StatelessWidget {
-//   final Product product;
-//   const AddToCartButton({required this.product, Key? key}) : super(key: key);
+class AddToCartButton extends StatelessWidget {
+  final Product product;
+  const AddToCartButton({required this.product, Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<CartCubit, Map<Product, int>>(builder: (context, state) {
-//       bool isInCart = state.containsKey(product);
-//       return isInCart
-//           ? PlusMinusWidget(product: product)
-//           : ElevatedButton(
-//               onPressed: () {
-//                 context.read<CartCubit>().add(product);
-//               },
-//               child: const Text('В корзину'));
-//     });
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+      bool isInCart = state.cart.containsKey(product);
+      return isInCart
+          ? PlusMinusWidget(product: product)
+          : ElevatedButton(
+              onPressed: () {
+                context
+                    .read<CartBloc>()
+                    .add(AddProductToCart(product: product));
+              },
+              child: const Text('В корзину'));
+    });
+  }
+}
 
 class FavoriteButton extends StatelessWidget {
   final Product product;

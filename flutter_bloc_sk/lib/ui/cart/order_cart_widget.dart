@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_sk/blocks/cart_bloc/cart_bloc.dart';
 import 'package:flutter_bloc_sk/models/product.dart';
 import 'package:flutter_bloc_sk/ui/cart/plus_minus_widget.dart';
 
@@ -44,7 +45,9 @@ class OrderCardWidget extends StatelessWidget {
                       ),
                       IconButton(
                           onPressed: () {
-                            // context.read<CartCubit>().remove(product);
+                            context
+                                .read<CartBloc>()
+                                .add(RemoveProductFromCart(product: product));
                           },
                           icon: const Icon(Icons.delete_outline))
                     ],
