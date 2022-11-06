@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_sk/models/product.dart';
-import 'package:meta/meta.dart';
 
 part 'favorite_event.dart';
 part 'favorite_state.dart';

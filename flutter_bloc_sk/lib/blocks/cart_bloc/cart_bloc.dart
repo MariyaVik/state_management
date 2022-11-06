@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_sk/models/product.dart';
-import 'package:meta/meta.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -21,7 +21,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     } else {
       state.cart[event.product] = 1;
     }
-    emit(CartState(cart: state.cart));
+    emit(CartWithItemsState(cart: state.cart));
   }
 
   _reduce(CartEvent event, emit) {
@@ -29,7 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       _remove(event, emit);
     } else {
       state.cart[event.product] = state.cart[event.product]! - 1;
-      emit(CartState(cart: state.cart));
+      emit(CartWithItemsState(cart: state.cart));
     }
   }
 
@@ -38,7 +38,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (state.cart.isEmpty) {
       emit(CartEmptyState());
     } else {
-      emit(CartState(cart: state.cart));
+      emit(CartWithItemsState(cart: state.cart));
     }
   }
 }

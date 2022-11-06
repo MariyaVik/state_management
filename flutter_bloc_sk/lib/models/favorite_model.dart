@@ -1,5 +1,4 @@
 import 'package:flutter_bloc_sk/models/product.dart';
-import 'package:equatable/equatable.dart';
 
 class FavoriteModel {
   final List<Product> products;
