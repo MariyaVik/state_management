@@ -1,4 +1,4 @@
-import 'package:flutter_provider/models/rating.dart';
+import 'package:flutter_redux_sk/models/rating.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
@@ -26,4 +26,11 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Product && id == other.id;
+
+  @override
+  int get hashCode => id;
 }
