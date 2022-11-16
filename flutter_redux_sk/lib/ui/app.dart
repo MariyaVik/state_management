@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_redux_sk/models/app_tab.dart';
 import 'package:flutter_redux_sk/redux/app_middleware.dart';
 import 'package:flutter_redux_sk/redux/app_reducer.dart';
 import 'package:flutter_redux_sk/redux/app_state.dart';
@@ -11,7 +12,8 @@ class App extends StatelessWidget {
 
   final store = Store<AppState>(reducer,
       middleware: appMiddleware(),
-      initialState: const AppState(products: [], isLoading: true));
+      initialState:
+          const AppState(products: [], isLoading: true, tab: AppTab.catalog));
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class App extends StatelessWidget {
       store: store,
       child: MaterialApp(
         theme: ThemeData(fontFamily: 'Vetka'),
-        home: const HomeScreen(),
+        home: HomeScreen(),
       ),
     );
   }
