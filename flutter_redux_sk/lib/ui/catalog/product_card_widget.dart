@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_redux_sk/models/product.dart';
+import 'package:flutter_redux_sk/redux/app_state.dart';
+import 'package:flutter_redux_sk/redux/favorites/favorites_actions.dart';
 import 'package:flutter_redux_sk/ui/cart/plus_minus_widget.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -98,26 +101,22 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(onPressed: () {}, icon: Icon(Icons.favorite));
-    // return BlocBuilder<FavoriteBloc, FavoriteState>(builder: ((context, state) {
-    //   bool isInFavorite = state.favorites.contains(product);
+    // return IconButton(onPressed: () {}, icon: Icon(Icons.favorite));
+    return StoreConnector<AppState, List<Product>>(
+        converter: (store) => store.state.favorites,
+        builder: ((context, favorites) {
+          bool isInFavorite = favorites.contains(product);
 
-    //   return IconButton(
-    //     splashRadius: null,
-    //     icon:
-    //         Icon(isInFavorite ? Icons.favorite_rounded : Icons.favorite_border),
-    //     onPressed: isInFavorite
-    //         ? () {
-    //             context
-    //                 .read<FavoriteBloc>()
-    //                 .add(RemoveProductFromFavorite(product: product));
-    //           }
-    //         : () {
-    //             context
-    //                 .read<FavoriteBloc>()
-    //                 .add(AddProductToFavorite(product: product));
-    //           },
-    //   );
-    // }));
+          return IconButton(
+            splashRadius: null,
+            icon: Icon(
+                isInFavorite ? Icons.favorite_rounded : Icons.favorite_border),
+            onPressed: isInFavorite
+                ? () => StoreProvider.of<AppState>(context)
+                    .dispatch(RemoveFavoriteAction(product: product))
+                : () => StoreProvider.of<AppState>(context)
+                    .dispatch(AddFavoriteAction(product: product)),
+          );
+        }));
   }
 }

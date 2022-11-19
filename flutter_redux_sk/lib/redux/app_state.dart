@@ -7,7 +7,11 @@ class AppState {
   final List<Product> products;
   final bool isLoading;
   final AppTab tab;
+  final List<Product> favorites;
 
   const AppState(
-      {required this.products, required this.isLoading, required this.tab});
+      {required this.products,
+      required this.isLoading,
+      required this.tab,
+      required this.favorites});
 }

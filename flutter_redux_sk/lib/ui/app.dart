@@ -12,8 +12,8 @@ class App extends StatelessWidget {
 
   final store = Store<AppState>(reducer,
       middleware: appMiddleware(),
-      initialState:
-          const AppState(products: [], isLoading: true, tab: AppTab.catalog));
+      initialState: const AppState(
+          products: [], isLoading: true, tab: AppTab.catalog, favorites: []));
 
   @override
   Widget build(BuildContext context) {
