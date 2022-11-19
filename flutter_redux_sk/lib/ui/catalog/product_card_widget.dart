@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_redux_sk/models/product.dart';
 import 'package:flutter_redux_sk/redux/app_state.dart';
+import 'package:flutter_redux_sk/redux/cart/cart_actions.dart';
 import 'package:flutter_redux_sk/redux/favorites/favorites_actions.dart';
 import 'package:flutter_redux_sk/ui/cart/plus_minus_widget.dart';
 
@@ -81,17 +82,18 @@ class AddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-    //   bool isInCart = state.cart.containsKey(product);
-    //   return isInCart
-    //       ? PlusMinusWidget(product: product):
-    return ElevatedButton(
-        onPressed: () {
-          // context
-          //     .read<CartBloc>()
-          //     .add(AddProductToCart(product: product));
-        },
-        child: const Text('В корзину'));
+    return StoreConnector<AppState, Map<Product, int>>(
+      converter: (store) => store.state.cart,
+      builder: (context, cart) {
+        bool isInCart = cart.containsKey(product);
+        return isInCart
+            ? PlusMinusWidget(product: product)
+            : ElevatedButton(
+                onPressed: () => StoreProvider.of<AppState>(context)
+                    .dispatch(AddToCartAction(product: product)),
+                child: const Text('В корзину'));
+      },
+    );
   }
 }
 

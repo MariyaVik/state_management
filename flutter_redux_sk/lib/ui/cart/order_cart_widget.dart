@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_redux_sk/models/product.dart';
+import 'package:flutter_redux_sk/redux/app_state.dart';
+import 'package:flutter_redux_sk/redux/cart/cart_actions.dart';
 import 'package:flutter_redux_sk/ui/cart/plus_minus_widget.dart';
 
 class OrderCardWidget extends StatelessWidget {
@@ -42,11 +45,8 @@ class OrderCardWidget extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {
-                            // context
-                            //     .read<CartBloc>()
-                            //     .add(RemoveProductFromCart(product: product));
-                          },
+                          onPressed: () => StoreProvider.of<AppState>(context)
+                              .dispatch(RemoveFromCartAction(product: product)),
                           icon: const Icon(Icons.delete_outline))
                     ],
                   ),

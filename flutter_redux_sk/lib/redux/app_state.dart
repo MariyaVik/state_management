@@ -8,10 +8,12 @@ class AppState {
   final bool isLoading;
   final AppTab tab;
   final List<Product> favorites;
+  final Map<Product, int> cart;
 
   const AppState(
       {required this.products,
       required this.isLoading,
       required this.tab,
-      required this.favorites});
+      required this.favorites,
+      required this.cart});
 }
