@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_redux_sk/models/app_tab.dart';
+import 'package:flutter_redux_sk/models/filters.dart';
 import 'package:flutter_redux_sk/redux/app_middleware.dart';
 import 'package:flutter_redux_sk/redux/app_reducer.dart';
 import 'package:flutter_redux_sk/redux/app_state.dart';
@@ -18,13 +19,15 @@ class App extends StatelessWidget {
           tab: AppTab.catalog,
           favorites: [],
           cart: {},
-          totalPrice: 0));
+          totalPrice: 0,
+          filter: Filters.all));
 
   @override
   Widget build(BuildContext context) {
     return StoreProvider(
       store: store,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Vetka'),
         home: HomeScreen(),
       ),

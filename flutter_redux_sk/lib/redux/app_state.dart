@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_redux_sk/models/app_tab.dart';
+import 'package:flutter_redux_sk/models/filters.dart';
 import 'package:flutter_redux_sk/models/product.dart';
 
 @immutable
@@ -10,6 +11,7 @@ class AppState {
   final List<Product> favorites;
   final Map<Product, int> cart;
   final double totalPrice;
+  final Filters filter;
 
   const AppState(
       {required this.products,
@@ -17,5 +19,6 @@ class AppState {
       required this.tab,
       required this.favorites,
       required this.cart,
-      required this.totalPrice});
+      required this.totalPrice,
+      required this.filter});
 }

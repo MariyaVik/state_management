@@ -6,6 +6,7 @@ import 'package:flutter_redux_sk/redux/app_state.dart';
 import 'package:flutter_redux_sk/redux/tab/tab_actions.dart';
 import 'package:flutter_redux_sk/ui/cart/cart_screen.dart';
 import 'package:flutter_redux_sk/ui/catalog/catalog_screen.dart';
+import 'package:flutter_redux_sk/ui/catalog/filter_button.dart';
 import 'package:flutter_redux_sk/ui/favorite_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.white54,
           appBar: AppBar(
             title: Text(tabBar[currentTabIndex].title),
+            actions: [if (currentTabIndex == 0) const FilterButton()],
           ),
           body: Center(child: _widgetOptions[currentTabIndex]),
           bottomNavigationBar: BottomNavigationBar(
