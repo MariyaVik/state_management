@@ -9,11 +9,13 @@ class AppState {
   final AppTab tab;
   final List<Product> favorites;
   final Map<Product, int> cart;
+  final double totalPrice;
 
   const AppState(
       {required this.products,
       required this.isLoading,
       required this.tab,
       required this.favorites,
-      required this.cart});
+      required this.cart,
+      required this.totalPrice});
 }

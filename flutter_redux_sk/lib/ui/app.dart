@@ -17,7 +17,8 @@ class App extends StatelessWidget {
           isLoading: true,
           tab: AppTab.catalog,
           favorites: [],
-          cart: {}));
+          cart: {},
+          totalPrice: 0));
 
   @override
   Widget build(BuildContext context) {

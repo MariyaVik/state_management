@@ -37,7 +37,8 @@ class CartList extends StatelessWidget {
                           Column(
                             children: [
                               const Text('ИТОГО:'),
-                              Text('${100}'),
+                              Text(
+                                  '${StoreProvider.of<AppState>(context).state.totalPrice}'),
                             ],
                           ),
                           ElevatedButton(
