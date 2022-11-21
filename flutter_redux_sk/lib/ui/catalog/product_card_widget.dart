@@ -17,36 +17,7 @@ class ProductCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox.square(
-            dimension: widthItem,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    product.image,
-                    fit: BoxFit.cover,
-                    // loadingBuilder: (context, child, fgvd) =>
-                    //     CircularProgressIndicator(),
-                  ),
-                  Positioned(
-                    top: 5,
-                    right: 5,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.amber,
-                      ),
-                      child: FavoriteButton(
-                        product: product,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          ImageStack(width: widthItem, product: product),
           Text(
             product.title,
             maxLines: 1,
@@ -67,10 +38,51 @@ class ProductCardWidget extends StatelessWidget {
           ),
           Text('\u0024${product.price}'),
           const SizedBox(height: 5),
-          AddToCartButton(
-            product: product,
-          ),
+          AddToCartButton(product: product),
         ],
+      ),
+    );
+  }
+}
+
+class ImageStack extends StatelessWidget {
+  const ImageStack({
+    Key? key,
+    required this.width,
+    required this.product,
+  }) : super(key: key);
+
+  final double width;
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: width,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              product.image,
+              fit: BoxFit.cover,
+              // loadingBuilder: (context, child, fgvd) =>
+              //     const Center(child: CircularProgressIndicator()),
+            ),
+            Positioned(
+              top: 5,
+              right: 5,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.amber,
+                ),
+                child: FavoriteButton(product: product),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

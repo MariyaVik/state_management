@@ -11,11 +11,16 @@ final cartReducer = combineReducers<Map<Product, int>>([
 Map<Product, int> _add(Map<Product, int> state, AddToCartAction action) {
   Map<Product, int> map = {};
   map.addAll(state);
-  if (map.containsKey(action.product)) {
-    map[action.product] = map[action.product]! + 1;
-  } else {
-    map[action.product] = 1;
-  }
+
+  map[action.product] =
+      map[action.product] == null ? 1 : map[action.product]! + 1;
+
+  // if (map.containsKey(action.product) && map[action.product] != null) {
+  //   map[action.product] = map[action.product] + 1;
+  // } else if (!map.containsKey(action.product) || map[action.product] == null) {
+  //   map[action.product] = 1;
+  // }
+
   return map;
 }
 
