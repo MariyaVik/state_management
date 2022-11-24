@@ -9,16 +9,16 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: TextField(
                 decoration: InputDecoration(
               hintText: 'Логин',
               border: OutlineInputBorder(),
             )),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: TextField(
                 decoration: InputDecoration(
               hintText: 'Пароль',
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Войти'),
+            child: const Text('Войти'),
           )
         ],
       ),

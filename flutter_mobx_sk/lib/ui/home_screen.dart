@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/models/tab_item.dart';
-import 'package:flutter_provider/services/api_service.dart';
-import 'package:flutter_provider/ui/cart/cart_screen.dart';
-import 'package:flutter_provider/ui/catalog/catalog_screen.dart';
-
-APIService apiService = APIService(); // ИЗМЕНИИИИИИТЬ!!!
+import 'package:flutter_mobx_sk/models/app_tab.dart';
+import 'package:flutter_mobx_sk/models/tab_item.dart';
+import 'package:flutter_mobx_sk/ui/cart/cart_screen.dart';
+import 'package:flutter_mobx_sk/ui/catalog/catalog_screen.dart';
+import 'package:flutter_mobx_sk/ui/catalog/filter_button.dart';
+import 'package:flutter_mobx_sk/ui/favorite_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,18 +15,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<TabItem> tabBar = [
-    TabItem(title: "Каталог", icon: Icon(Icons.list)),
-    TabItem(title: "Избранное", icon: Icon(Icons.favorite)),
-    TabItem(title: "Корзина", icon: Icon(Icons.shopping_basket)),
+    TabItem(title: "Каталог", icon: const Icon(Icons.list)),
+    TabItem(title: "Избранное", icon: const Icon(Icons.favorite)),
+    TabItem(title: "Корзина", icon: const Icon(Icons.shopping_basket)),
   ];
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    CatalogList(),
-    Container(
-      color: Colors.blue,
-    ),
-    CartList(),
+    const CatalogList(),
+    const FavoriteList(),
+    const CartList(),
   ];
 
   @override
@@ -47,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white54,
       appBar: AppBar(
         title: Text(tabBar[_selectedIndex].title),
+        actions: [if (_selectedIndex == 0) const FilterButton()],
       ),
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(

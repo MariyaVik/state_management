@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_provider/ui/cart/plus_minus_widget.dart';
+import 'package:flutter_mobx_sk/models/product.dart';
+import 'package:flutter_mobx_sk/ui/cart/plus_minus_widget.dart';
 
 class OrderCardWidget extends StatelessWidget {
-  int index;
-  OrderCardWidget({required this.index, Key? key}) : super(key: key);
+  final Product product;
+  const OrderCardWidget({required this.product, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(
-          255, 255 - index * 10, 255 - index * 5, 255 - index * 20),
+      // color: Color.fromARGB(
+      //     255, 255 - index * 10, 255 - index * 5, 255 - index * 20),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -19,10 +20,10 @@ class OrderCardWidget extends StatelessWidget {
               child: SizedBox.square(
                 dimension: 100,
                 child: Image.network(
-                  'https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg',
+                  product.image,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
-                      ColoredBox(color: Colors.cyan),
+                      const ColoredBox(color: Colors.cyan),
                 ),
               ),
             ),
@@ -31,19 +32,28 @@ class OrderCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(index.toString()),
+                      Expanded(
+                        child: Text(
+                          product.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.delete_outline))
+                          onPressed: () {},
+                          icon: const Icon(Icons.delete_outline))
                     ],
                   ),
-                  Text('Категория'),
+                  Text(product.category),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Цена'),
-                      PlusMinusWidget(),
+                      Text(product.price.toString()),
+                      PlusMinusWidget(
+                        product: product,
+                      ),
                     ],
                   )
                 ],
