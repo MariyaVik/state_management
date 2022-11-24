@@ -20,7 +20,8 @@ class App extends StatelessWidget {
           favorites: [],
           cart: {},
           totalPrice: 0,
-          filter: Filters.all));
+          filter: Filters.all,
+          filteredProducts: []));
 
   @override
   Widget build(BuildContext context) {

@@ -17,3 +17,10 @@ Middleware<AppState> loadProducts(APIService repository) {
     next(action);
   };
 }
+
+Middleware<AppState> filterProducts() {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    next(action);
+    store.dispatch(FiltrationProductsAction(appState: store.state));
+  };
+}

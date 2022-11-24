@@ -1,4 +1,5 @@
 import 'package:flutter_redux_sk/models/product.dart';
+import 'package:flutter_redux_sk/redux/app_state.dart';
 
 class ProductsLoadingAction {}
 
@@ -8,3 +9,8 @@ class ProductsSuccessAction {
 }
 
 class ProductsErrorAction {}
+
+class FiltrationProductsAction {
+  AppState appState;
+  FiltrationProductsAction({required this.appState});
+}

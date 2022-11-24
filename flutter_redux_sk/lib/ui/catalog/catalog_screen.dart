@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_redux_sk/models/filters.dart';
 import 'package:flutter_redux_sk/models/product.dart';
 import 'package:flutter_redux_sk/redux/app_state.dart';
 import 'package:flutter_redux_sk/redux/products/products_actions.dart';
@@ -33,38 +32,12 @@ class _CatalogListState extends State<CatalogList> {
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListProducts(
-                  products: state.products.where((p) {
-                    var filter = state.filter;
-                    switch (filter) {
-                      case Filters.bacon:
-                        return p.category == FilterName.baconFilter;
-                      case Filters.pizza:
-                        return p.category == FilterName.pizzaFilter;
-                      case Filters.salad:
-                        return p.category == FilterName.saladFilter;
-                      default:
-                        return true;
-                    }
-                  }).toList(),
+                  products: state.filteredProducts,
                 ));
       },
     );
   }
 }
-
-// products.where((p) {
-//       var filter = store.state.filter;
-//       switch (filter) {
-//         case Filters.bacon:
-//           return p.category == FilterName.baconFilter;
-//         case Filters.pizza:
-//           return p.category == FilterName.pizzaFilter;
-//         case Filters.salad:
-//           return p.category == FilterName.saladFilter;
-//         default:
-//           return true;
-//       }
-//     }).toList()
 
 class ListProducts extends StatelessWidget {
   final List<Product> products;

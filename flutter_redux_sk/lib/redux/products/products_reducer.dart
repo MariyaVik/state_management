@@ -1,3 +1,4 @@
+import 'package:flutter_redux_sk/models/filters.dart';
 import 'package:flutter_redux_sk/models/product.dart';
 import 'package:flutter_redux_sk/redux/products/products_actions.dart';
 import 'package:redux/redux.dart';

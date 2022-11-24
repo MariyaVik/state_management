@@ -12,6 +12,7 @@ class AppState {
   final Map<Product, int> cart;
   final double totalPrice;
   final Filters filter;
+  final List<Product> filteredProducts;
 
   const AppState(
       {required this.products,
@@ -20,5 +21,6 @@ class AppState {
       required this.favorites,
       required this.cart,
       required this.totalPrice,
-      required this.filter});
+      required this.filter,
+      required this.filteredProducts});
 }
