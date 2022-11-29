@@ -34,3 +34,9 @@ class Product {
   @override
   int get hashCode => id;
 }
+
+
+
+// id: num.parse(json['id']) as int,
+//       title: json['title'] as String,
+//       price: num.parse(json['price']) as double,

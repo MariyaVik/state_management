@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx_sk/mobx/products/products.dart';
+import 'package:flutter_mobx_sk/services/api_service.dart';
 import 'package:flutter_mobx_sk/ui/home_screen.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Vetka'),
-      home: HomeScreen(),
+    return MultiProvider(
+      providers: [
+        Provider(create: ((context) => ProductsState(APIService()))),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Vetka'),
+        home: const HomeScreen(),
+      ),
     );
   }
 }
