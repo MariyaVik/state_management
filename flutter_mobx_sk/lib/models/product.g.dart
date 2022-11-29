@@ -9,7 +9,7 @@ part of 'product.dart';
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       id: num.parse(json['id']) as int,
       title: json['title'] as String,
-      price: num.parse(json['price']) as double,
+      price: (num.parse(json['price'])).toDouble(),
       category: json['category'] as String,
       description: json['description'] as String,
       image: json['image'] as String,

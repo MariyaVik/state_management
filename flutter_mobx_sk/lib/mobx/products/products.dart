@@ -1,3 +1,4 @@
+import 'package:flutter_mobx_sk/models/filters.dart';
 import 'package:flutter_mobx_sk/models/product.dart';
 import 'package:flutter_mobx_sk/services/api_service.dart';
 import 'package:mobx/mobx.dart';
@@ -19,10 +20,27 @@ abstract class _ProductsState with Store {
   @observable
   String error = '';
 
+  @observable
+  Filters currentFilter = Filters.all;
+
   @computed
   bool get isLoading => products.isEmpty && !hasError;
   @computed
   bool get hasError => error != '';
+
+  @computed
+  List<Product> get filteredProducts => products.where((p) {
+        switch (currentFilter) {
+          case Filters.bacon:
+            return p.category == FilterName.baconFilter;
+          case Filters.pizza:
+            return p.category == FilterName.pizzaFilter;
+          case Filters.salad:
+            return p.category == FilterName.saladFilter;
+          default:
+            return true;
+        }
+      }).toList();
 
   @action
   Future<void> loadProducts() async {

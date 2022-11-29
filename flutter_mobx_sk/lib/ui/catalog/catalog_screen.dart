@@ -36,7 +36,7 @@ class _CatalogListState extends State<CatalogList> {
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListProducts(
-                      products: productsProvider.products,
+                      products: productsProvider.filteredProducts,
                     ));
       },
     );

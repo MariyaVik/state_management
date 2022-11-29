@@ -22,6 +22,13 @@ mixin _$ProductsState on _ProductsState, Store {
   bool get hasError => (_$hasErrorComputed ??=
           Computed<bool>(() => super.hasError, name: '_ProductsState.hasError'))
       .value;
+  Computed<List<Product>>? _$filteredProductsComputed;
+
+  @override
+  List<Product> get filteredProducts => (_$filteredProductsComputed ??=
+          Computed<List<Product>>(() => super.filteredProducts,
+              name: '_ProductsState.filteredProducts'))
+      .value;
 
   late final _$productsAtom =
       Atom(name: '_ProductsState.products', context: context);
@@ -54,6 +61,22 @@ mixin _$ProductsState on _ProductsState, Store {
     });
   }
 
+  late final _$currentFilterAtom =
+      Atom(name: '_ProductsState.currentFilter', context: context);
+
+  @override
+  Filters get currentFilter {
+    _$currentFilterAtom.reportRead();
+    return super.currentFilter;
+  }
+
+  @override
+  set currentFilter(Filters value) {
+    _$currentFilterAtom.reportWrite(value, super.currentFilter, () {
+      super.currentFilter = value;
+    });
+  }
+
   late final _$loadProductsAsyncAction =
       AsyncAction('_ProductsState.loadProducts', context: context);
 
@@ -67,8 +90,10 @@ mixin _$ProductsState on _ProductsState, Store {
     return '''
 products: ${products},
 error: ${error},
+currentFilter: ${currentFilter},
 isLoading: ${isLoading},
-hasError: ${hasError}
+hasError: ${hasError},
+filteredProducts: ${filteredProducts}
     ''';
   }
 }
