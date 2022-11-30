@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx_sk/mobx/favorites/favorites.dart';
 import 'package:flutter_mobx_sk/mobx/products/products.dart';
 import 'package:flutter_mobx_sk/services/api_service.dart';
 import 'package:flutter_mobx_sk/ui/home_screen.dart';
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: ((context) => ProductsState(APIService()))),
+        Provider(create: ((context) => FavoritesState())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

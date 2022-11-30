@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx_sk/mobx/favorites/favorites.dart';
 import 'package:flutter_mobx_sk/models/product.dart';
 import 'package:flutter_mobx_sk/ui/cart/plus_minus_widget.dart';
+import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final Product product;
@@ -112,22 +115,19 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(onPressed: () {}, icon: Icon(Icons.favorite));
-    // return StoreConnector<AppState, List<Product>>(
-    //     converter: (store) => store.state.favorites,
-    //     builder: ((context, favorites) {
-    //       bool isInFavorite = favorites.contains(product);
-
-    //       return IconButton(
-    //         splashRadius: null,
-    //         icon: Icon(
-    //             isInFavorite ? Icons.favorite_rounded : Icons.favorite_border),
-    //         onPressed: isInFavorite
-    //             ? () => StoreProvider.of<AppState>(context)
-    //                 .dispatch(RemoveFavoriteAction(product: product))
-    //             : () => StoreProvider.of<AppState>(context)
-    //                 .dispatch(AddFavoriteAction(product: product)),
-    //       );
-    //     }));
+    // return IconButton(onPressed: () {}, icon: Icon(Icons.favorite));
+    return Observer(builder: ((context) {
+      final favoritesProvider = Provider.of<FavoritesState>(context);
+      bool isInFavorite = favoritesProvider.favorites.contains(product);
+      return IconButton(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        icon:
+            Icon(isInFavorite ? Icons.favorite_rounded : Icons.favorite_border),
+        onPressed: isInFavorite
+            ? () => favoritesProvider.removeProduct(product)
+            : () => favoritesProvider.addProduct(product),
+      );
+    }));
   }
 }

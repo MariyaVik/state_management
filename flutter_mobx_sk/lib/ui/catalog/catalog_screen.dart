@@ -6,22 +6,8 @@ import 'package:flutter_mobx_sk/models/product.dart';
 import 'package:flutter_mobx_sk/ui/catalog/product_card_widget.dart';
 import 'package:provider/provider.dart';
 
-class CatalogList extends StatefulWidget {
+class CatalogList extends StatelessWidget {
   const CatalogList({Key? key}) : super(key: key);
-
-  @override
-  State<CatalogList> createState() => _CatalogListState();
-}
-
-class _CatalogListState extends State<CatalogList> {
-  // @override
-  // void didChangeDependencies() async {
-  //   if (StoreProvider.of<AppState>(context).state.isLoading) {
-  //     await StoreProvider.of<AppState>(context)
-  //         .dispatch(ProductsLoadingAction());
-  //   }
-  //   super.didChangeDependencies();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +28,6 @@ class _CatalogListState extends State<CatalogList> {
     );
   }
 }
-
-// products.where((p) {
-//       var filter = store.state.filter;
-//       switch (filter) {
-//         case Filters.bacon:
-//           return p.category == FilterName.baconFilter;
-//         case Filters.pizza:
-//           return p.category == FilterName.pizzaFilter;
-//         case Filters.salad:
-//           return p.category == FilterName.saladFilter;
-//         default:
-//           return true;
-//       }
-//     }).toList()
 
 class ListProducts extends StatelessWidget {
   final List<Product> products;
