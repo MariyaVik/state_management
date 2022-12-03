@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx_sk/mobx/cart/cart_state.dart';
 import 'package:flutter_mobx_sk/mobx/favorites/favorites.dart';
 import 'package:flutter_mobx_sk/mobx/products/products.dart';
 import 'package:flutter_mobx_sk/services/api_service.dart';
@@ -12,8 +13,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: ((context) => ProductsState(APIService()))),
-        Provider(create: ((context) => FavoritesState())),
+        Provider(create: (context) => ProductsState(APIService())),
+        Provider(create: (context) => FavoritesState()),
+        Provider(create: (context) => CartState()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

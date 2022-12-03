@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx_sk/mobx/cart/cart_state.dart';
 import 'package:flutter_mobx_sk/models/product.dart';
+import 'package:provider/provider.dart';
 
 class PlusMinusWidget extends StatelessWidget {
   final Product product;
@@ -7,6 +10,7 @@ class PlusMinusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cartProvider = Provider.of<CartState>(context);
     return Container(
       // height: 28,
       decoration: BoxDecoration(
@@ -20,14 +24,16 @@ class PlusMinusWidget extends StatelessWidget {
             // iconSize: 28,
             // padding: EdgeInsets.all(0),
             icon: const Text('-'),
-            onPressed: () {},
+            onPressed: () => cartProvider.reduceProduct(product),
           ),
-          Text('3'),
+          Observer(builder: (context) {
+            return Text('${cartProvider.cart[product]}');
+          }),
           IconButton(
             // iconSize: 28,
             // padding: EdgeInsets.all(0),
             icon: const Text('+'),
-            onPressed: () {},
+            onPressed: () => cartProvider.addProduct(product),
           ),
         ],
       ),

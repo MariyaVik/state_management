@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx_sk/mobx/cart/cart_state.dart';
 import 'package:flutter_mobx_sk/mobx/favorites/favorites.dart';
 import 'package:flutter_mobx_sk/models/product.dart';
 import 'package:flutter_mobx_sk/ui/cart/plus_minus_widget.dart';
@@ -93,19 +94,18 @@ class AddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: () {}, child: const Text('В корзину'));
-    // return StoreConnector<AppState, Map<Product, int>>(
-    //   converter: (store) => store.state.cart,
-    //   builder: (context, cart) {
-    //     bool isInCart = cart.containsKey(product);
-    //     return isInCart
-    //         ? PlusMinusWidget(product: product)
-    //         : ElevatedButton(
-    //             onPressed: () => StoreProvider.of<AppState>(context)
-    //                 .dispatch(AddToCartAction(product: product)),
-    //             child: const Text('В корзину'));
-    //   },
-    // );
+    // return ElevatedButton(onPressed: () {}, child: const Text('В корзину'));
+    return Observer(
+      builder: (context) {
+        final cartProvider = Provider.of<CartState>(context);
+        bool isInCart = cartProvider.cart.containsKey(product);
+        return isInCart
+            ? PlusMinusWidget(product: product)
+            : ElevatedButton(
+                onPressed: () => cartProvider.addProduct(product),
+                child: const Text('В корзину'));
+      },
+    );
   }
 }
 

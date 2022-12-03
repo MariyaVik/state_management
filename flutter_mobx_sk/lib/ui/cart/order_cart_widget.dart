@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx_sk/mobx/cart/cart_state.dart';
 import 'package:flutter_mobx_sk/models/product.dart';
 import 'package:flutter_mobx_sk/ui/cart/plus_minus_widget.dart';
+import 'package:provider/provider.dart';
 
 class OrderCardWidget extends StatelessWidget {
   final Product product;
@@ -42,7 +44,9 @@ class OrderCardWidget extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Provider.of<CartState>(context, listen: false)
+                                  .removeProduct(product),
                           icon: const Icon(Icons.delete_outline))
                     ],
                   ),

@@ -44,7 +44,6 @@ abstract class _ProductsState with Store {
 
   @action
   Future<void> loadProducts() async {
-    print('сейчас начнётся загрузка');
     products = await productsRepository
         .getAllProducts()
         .then((products) => products)
