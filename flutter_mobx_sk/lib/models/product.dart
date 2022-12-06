@@ -5,13 +5,15 @@ part 'product.g.dart';
 
 @JsonSerializable()
 class Product {
-  int id;
-  String title;
-  double price;
-  String category;
-  String description;
-  String image;
-  Rating rating;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
+  final num id;
+  final String title;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
+  final num price;
+  final String category;
+  final String description;
+  final String image;
+  final Rating rating;
 
   Product({
     required this.id,
@@ -27,15 +29,16 @@ class Product {
       _$ProductFromJson(json);
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 
+  static num _fromJson(String json) => num.parse(json);
+  static String _toJson(num object) => object.toString();
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) || other is Product && id == other.id;
 
   @override
-  int get hashCode => id;
+  int get hashCode => id as int;
 }
-
-
 
 // id: num.parse(json['id']) as int,
 //       title: json['title'] as String,
